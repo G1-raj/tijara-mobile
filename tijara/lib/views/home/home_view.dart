@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tijara/constants.dart';
 import 'package:tijara/views/chat_list/chat_list_view.dart';
+import 'package:tijara/views/main_page/main_page_view.dart';
 import 'package:tijara/views/profile/profile_view.dart';
 import 'package:tijara/views/user_listing/user_listings.dart';
 
@@ -15,7 +16,7 @@ class _HomeViewState extends State<HomeView> {
   int currIndex = 0;
 
   final List<Widget> pages = [
-    Center(child: Text("Page 1")),
+    MainPageView(),
     ChatListView(),
     UserListings(),
     ProfileView(),

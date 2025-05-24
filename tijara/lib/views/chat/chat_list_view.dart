@@ -27,11 +27,16 @@ class ChatListView extends StatelessWidget {
                 ),
               ),
 
+              const SizedBox(height: 18,),
+
               Expanded(
                 child: ListView.builder(
                   itemCount: 4,
                   itemBuilder: (context, index) {
-                    return ChatOverviewCard(userName: "hgjhgj", lastMessage: "hfghfhgfh", time: "dfdgfdgh", profileImageUrl: "ghfhgfhgfh");
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: ChatOverviewCard(),
+                    );
                   },
                 ),
               )

@@ -1,76 +1,100 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tijara/constants.dart';
-import 'package:tijara/views/chat_list/chat_list_view.dart';
-import 'package:tijara/views/main_page/main_page_view.dart';
+import 'package:tijara/views/chat/chat_list_view.dart';
+import 'package:tijara/views/listing/listing_view.dart';
+import 'package:tijara/views/notifications/notifications_page.dart';
 import 'package:tijara/views/profile/profile_view.dart';
-import 'package:tijara/views/user_listing/user_listings.dart';
+import 'package:tijara/views/settings/settings_view.dart';
+import 'package:tijara/widgets/image_holder/image_holder.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({super.key});
-
-  @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  int currIndex = 0;
-
-  final List<Widget> pages = [
-    MainPageView(),
-    ChatListView(),
-    UserListings(),
-    ProfileView(),
-  ];
-
-  void switchPage(int index) {
-    setState(() {
-      currIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      body: pages[currIndex],
-      floatingActionButton: FloatingActionButton(
-        shape: CircleBorder(),
-        onPressed: () {
-          switchPage(2); 
-        },
-        backgroundColor: blueColor,
-        child: Icon(Icons.add, color: whiteColor,),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        color: purpleColor,
-        shape: CircularNotchedRectangle(),
-        notchMargin: 8.0,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                icon: Icon(Icons.home, color: currIndex == 0 ? whiteColor : Colors.white.withOpacity(0.5)),
-                onPressed: () => switchPage(0),
+
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+           SizedBox(
+             height: MediaQuery.of(context).size.height * 0.38,
+             child: DrawerHeader(
+               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ImageHolder(),
+                  SizedBox(height: 10),
+                  Text(
+                    "John Doe",
+                    style: TextStyle(color: blackColor, fontSize: 18),
+                  ),
+                  Text(
+                    "john.doe@example.com",
+                    style: TextStyle(color: blackColor, fontSize: 14),
+                  ),
+                ],
               ),
-              IconButton(
-                icon: Icon(Icons.chat, color: currIndex == 1 ? whiteColor : Colors.white.withOpacity(0.5)),
-                onPressed: () => switchPage(1),
-              ),
-              SizedBox(width: 40), // Space for FAB
-              IconButton(
-                icon: Icon(Icons.list, color: currIndex == 2 ? whiteColor : Colors.white.withOpacity(0.5)),
-                onPressed: () => switchPage(2),
-              ),
-              IconButton(
-                icon: Icon(Icons.person, color: currIndex == 3 ? whiteColor : Colors.white.withOpacity(0.5)),
-                onPressed: () => switchPage(3),
-              ),
-            ],
-          ),
+             ),
+           ),
+        
+           ListTile(
+            leading: const Icon(Icons.list),
+            title: Text("Listings"),
+            onTap: () {
+              Get.to(ListingView());
+            },
+           ),
+           ListTile(
+            leading: const Icon(Icons.chat_bubble),
+            title: Text("Chats"),
+            onTap: () {
+              Get.to(ChatListView());
+            },
+           ),
+           ListTile(
+            leading: const Icon(Icons.create),
+            title: Text("Create Listing"),
+            onTap: () {},
+           ),
+           ListTile(
+            leading: const Icon(Icons.person),
+            title: Text("Profile"),
+            onTap: () {
+              Get.to(ProfileView());
+            },
+           ),
+           ListTile(
+            leading: const Icon(Icons.settings),
+            title: Text("Settings"),
+            onTap: () {
+              Get.to(SettingsView());
+            },
+           ),
+          ],
         ),
+      ),
+
+      appBar: AppBar(
+
+        elevation: 6,
+        backgroundColor: whiteColor,
+        shadowColor: whiteColor,
+
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 18),
+            child: IconButton(
+              onPressed: () {
+                Get.to(NotificationsPage());
+              },
+              icon: Icon(Icons.notifications),
+            ),
+          )
+        ],
       ),
     );
   }

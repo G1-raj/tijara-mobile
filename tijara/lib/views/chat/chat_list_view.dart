@@ -12,6 +12,13 @@ class ChatListView extends StatelessWidget {
       backgroundColor: whiteColor,
 
       appBar: AppBar(
+        title: Text("Chats", style: TextStyle(
+          color: blackColor,
+          fontWeight: FontWeight.bold
+        ),),
+
+        centerTitle: true,
+        
         backgroundColor: whiteColor,
       ),
 
@@ -34,7 +41,7 @@ class ChatListView extends StatelessWidget {
                   itemCount: 4,
                   itemBuilder: (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
+                      padding: const EdgeInsets.only(top: 12.0),
                       child: ChatOverviewCard(),
                     );
                   },

@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tijara/constants.dart';
+import 'package:tijara/views/listing/listing_view.dart';
+import 'package:tijara/views/profile/my_profile_view.dart';
+import 'package:tijara/views/settings/settings_view.dart';
 import 'package:tijara/widgets/app_button/app_button.dart';
 import 'package:tijara/widgets/image_holder/image_holder.dart';
-import 'package:tijara/widgets/profile_inputs/profile_inputs.dart';
+
 
 class ProfileView extends StatelessWidget {
-  ProfileView({super.key});
-
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _bioController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  // final TextEditingController _dateOfBirthController = TextEditingController();
-  final TextEditingController _streetController = TextEditingController();
-  final TextEditingController _cityController = TextEditingController();
+  const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,45 +25,62 @@ class ProfileView extends StatelessWidget {
 
                 ImageHolder(),
 
-                const SizedBox(height: 58,),
+                const SizedBox(height: 12,),
 
-                ProfileInputs(
-                  title: "Name",
-                  controller: _nameController,
-                  initalValue: "Govind Rajput",
+                Text("Jhon Doe", style: TextStyle(
+                  color: blackColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22
+                ),),
+
+                Divider(
+                  indent: MediaQuery.of(context).size.width * 0.18,
+                  endIndent: MediaQuery.of(context).size.width * 0.18,
                 ),
 
-                ProfileInputs(
-                  title: "Email",
-                  controller: _emailController,
-                  initalValue: "govindrajput7767@gmail.com",
+                const SizedBox(height: 18,),
+
+                ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text("Profile"),
+                  trailing: Icon(Icons.arrow_forward_ios),
+
+                  onTap: () {
+                    Get.to(MyProfileView());
+                  },
                 ),
 
-                ProfileInputs(
-                  title: "Bio",
-                  controller: _bioController,
-                  initalValue: "I am an enginner",
+                ListTile(
+                  leading: Icon(Icons.list),
+                  title: Text("My Listings"),
+                  trailing: Icon(Icons.arrow_forward_ios),
+
+                  onTap: () {
+                    Get.to(ListingView());
+                  },
                 ),
 
-                ProfileInputs(
-                  title: "Phone No",
-                  controller: _phoneController,
-                  initalValue: "8765432190",
+                ListTile(
+                  leading: Icon(Icons.favorite),
+                  title: Text("Saved listings"),
+                  trailing: Icon(Icons.arrow_forward_ios),
+
+                  onTap: () {
+                    Get.to(ListingView());
+                  },
+                ),
+                
+                ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text("Settings"),
+                  trailing: Icon(Icons.arrow_forward_ios),
+
+                  onTap: () {
+                    Get.to(SettingsView());
+                  },
                 ),
 
-                ProfileInputs(
-                  title: "Street",
-                  controller: _streetController,
-                  initalValue: "Nari road",
-                ),
-
-                ProfileInputs(
-                  title: "City",
-                  controller: _cityController,
-                  initalValue: "Nagpur",
-                ),
-
-                const SizedBox(height: 22,),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1,),
 
                 AppButton(
                   widthSize: 0.65,
@@ -77,6 +90,8 @@ class ProfileView extends StatelessWidget {
                   textColor: whiteColor
                 )
 
+                
+
               ],
             ),
           ),
@@ -85,3 +100,4 @@ class ProfileView extends StatelessWidget {
     );
   }
 }
+

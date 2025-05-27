@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:tijara/constants.dart';
 import 'package:tijara/models/auth/auth_model.dart';
@@ -12,26 +11,60 @@ class AuthServices {
 
   Future<ResponseModel> loginService(String email, String password) async {
     try {
+      final response = await _dio.post(
+        loginRoute,
+        data: {
+          "email": email,
+          "password": password,
+        },
+        options: Options(
+          headers: {
+            "Content-Type": "application/json",
+          },
+        ),
+      );
 
-      var response = await _dio.post(loginRoute, data: jsonEncode({
-        "email": email,
-        "password": password
-      }));
-
-      if(response.statusCode != 200) {
-        return ResponseModel.error(ErrorModel.fromJson(response.data));
+      return ResponseModel.success(
+        SuccessModel(
+          data: AuthModel.fromJson(response.data),
+        ),
+      );
+    } on DioException catch (e) {
+      if (e.response != null && e.response?.data != null) {
+        try {
+          // Parse backend error to ErrorModel
+          final errorModel = ErrorModel.fromJson(e.response!.data);
+          return ResponseModel.error(errorModel);
+        } catch (_) {
+          // Fallback if parsing fails
+          return ResponseModel.error(ErrorModel(
+            success: false,
+            error: ApiError(
+              code: e.response?.statusCode.toString() ?? "unknown_error",
+              message: "An unknown error occurred",
+            ),
+          ));
+        }
+      } else {
+        return ResponseModel.error(ErrorModel(
+          success: false,
+          error: ApiError(
+            code: "network_error",
+            message: "No response from server",
+          ),
+        ));
       }
-
-      return ResponseModel.success(SuccessModel(
-        // success: response.data["success"],
-        data: AuthModel.fromJson(response.data)
-      ));
-      
     } catch (e) {
-      throw Exception("Failed to login error is in login service and error is: $e");
+      return ResponseModel.error(ErrorModel(
+        success: false,
+        error: ApiError(
+          code: "unexpected_error",
+          message: "Unexpected error: $e",
+        ),
+      ));
     }
-
   }
+
 
   Future<void> registerService() async {
 

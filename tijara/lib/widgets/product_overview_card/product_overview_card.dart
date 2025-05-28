@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ProductOverviewCard extends StatelessWidget {
-  const ProductOverviewCard({super.key});
+  final String bannerImageUrl;
+  final String title;
+  final int price;
+  const ProductOverviewCard({super.key, required this.bannerImageUrl, required this.price, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,7 @@ class ProductOverviewCard extends StatelessWidget {
                     fit: StackFit.expand,
                     children: [
                       Image.network(
-                        "https://c.ndtvimg.com/2024-09/mughe8d8_eclass_625x300_18_September_24.jpg?im=FaceCrop,algorithm=dnn,width=1200,height=738",
+                        bannerImageUrl,
                         fit: BoxFit.cover,
                       ),
                       Positioned(
@@ -85,8 +88,8 @@ class ProductOverviewCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Mahindra E-Class Tractor',
+                      Text(
+                        title,
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -103,7 +106,7 @@ class ProductOverviewCard extends StatelessWidget {
                       ),
                       const Spacer(),
                       Text(
-                        '₹5,60,000',
+                        '\$$price',
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.green.shade700,

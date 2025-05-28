@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tijara/constants.dart';
+import 'package:tijara/controllers/auth_controller.dart';
+import 'package:tijara/controllers/listing_controller.dart';
+import 'package:tijara/controllers/user_controller.dart';
 import 'package:tijara/views/listing/listing_view.dart';
 import 'package:tijara/views/profile/my_profile_view.dart';
 import 'package:tijara/views/settings/settings_view.dart';
@@ -9,7 +12,13 @@ import 'package:tijara/widgets/image_holder/image_holder.dart';
 
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+  ProfileView({super.key});
+
+  // final UserController _userController = Get.put(UserController());
+
+  // final AuthController _authController = Get.put(AuthController());
+
+  final ListingController _listingController = Get.put(ListingController());
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +96,16 @@ class ProfileView extends StatelessWidget {
                   heightSize: 0.06, 
                   buttonColor: Colors.red, 
                   text: "Logout", 
-                  textColor: whiteColor
+                  textColor: whiteColor,
+                  onPressed: () {
+                    // _userController.getUserProfileController();
+
+                    // _authController.logOutController();
+
+                    _listingController.getIndividualListingController("cmaxw3f0p0001jw1dp3mhpjfg");
+
+                    print("Successfully executed logout succesfully😄");
+                  },
                 )
 
                 

@@ -138,7 +138,7 @@ class DataModel {
       "showEmail": showEmail,
       "showOnlineStatus": showOnlineStatus,
       "showPhoneNumber": showPhoneNumber,
-      "listings": listings.map((x) => x?.toJson()).toList(),
+      "listings": listings.map((x) => x.toJson()).toList(),
     };
   }
 

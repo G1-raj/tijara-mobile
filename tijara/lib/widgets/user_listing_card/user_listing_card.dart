@@ -3,7 +3,12 @@ import 'package:tijara/constants.dart';
 import 'package:tijara/widgets/app_button/app_button.dart';
 
 class UserListingCard extends StatelessWidget {
-  const UserListingCard({super.key});
+  final String imageUrl;
+  final String productTitle;
+  final int price;
+  final String location;
+  final String listingDate;
+  const UserListingCard({super.key, required this.imageUrl, required this.productTitle, required this.price, required this.location, required this.listingDate});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +31,7 @@ class UserListingCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.0),
                 child: Image.network(
-                  "https://www.team-bhp.com/sites/default/files/pictures2023/1_31.jpeg",
+                  imageUrl,
                   width: screenWidth * 0.4,
                   height: screenHeight * 0.18,
                   fit: BoxFit.cover,
@@ -46,7 +51,7 @@ class UserListingCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Volkswagen Polo GT",
+                          productTitle,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
@@ -56,7 +61,7 @@ class UserListingCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          "\$8000",
+                          "\$$price",
                           style: TextStyle(
                             color: Colors.green,
                             fontWeight: FontWeight.bold,
@@ -75,7 +80,7 @@ class UserListingCard extends StatelessWidget {
                         const SizedBox(width: 4),
                         Expanded(
                           child: Text(
-                            "HOMS",
+                            location,
                             style: TextStyle(color: greyColor, fontSize: 14),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -87,7 +92,7 @@ class UserListingCard extends StatelessWidget {
                     const SizedBox(height: 4),
 
                     Text(
-                      "12/05/2025",
+                      listingDate,
                       style: TextStyle(color: greyColor, fontSize: 14),
                     ),
 

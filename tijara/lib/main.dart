@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:tijara/views/auth/login/login_view.dart';
 import 'package:tijara/views/home/home_view.dart';
+import 'package:tijara/views/listing/listing_detail_view.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: HomeView(),
       // home: LoginView(),
+      // home: ListingDetailView(),
     );
   }
 }

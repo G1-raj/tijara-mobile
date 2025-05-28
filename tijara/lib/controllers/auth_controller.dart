@@ -51,6 +51,8 @@ class AuthController extends GetxController {
 
 
         isLoggedIn(true);
+
+        return;
       }
 
       showCustomSnackbar("Failed to login", true);
@@ -59,6 +61,17 @@ class AuthController extends GetxController {
       
     } catch (e) {
       throw Exception("Failed to login user and error is in login controller and error is: $e");
+    }
+  }
+
+  Future<void> logOutController() async {
+    try {
+
+      _storage.delete(key: "tijara_user_data");
+      _storage.delete(key: "tijara_access_token");
+      
+    } catch (e) {
+      throw Exception("Failed to logout user and error is in controller and error is: $e");
     }
   }
 }

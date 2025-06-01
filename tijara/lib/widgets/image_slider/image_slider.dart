@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tijara/constants.dart';
+import 'package:tijara/controllers/listing_controller.dart';
 
 class ImageSlider extends StatefulWidget {
   final List<String> imageUrls;
@@ -15,7 +17,7 @@ class _ImageSliderState extends State<ImageSlider> {
   late final ScrollController _dotScrollController;
   int _currentIndex = 0;
 
-  bool isFavourite = false;
+  final ListingController _listingController = Get.put(ListingController());
 
   @override
   void initState() {
@@ -90,18 +92,24 @@ class _ImageSliderState extends State<ImageSlider> {
        Positioned(
         top: 16,
         right: 16,
-        child: GestureDetector(
-          onTap: () {
-            // Handle toggle logic here
-            setState(() {
-              isFavourite = !isFavourite;
-            });
-          },
-          child: Icon(
-            isFavourite ? Icons.favorite : Icons.favorite_border,
-            color: isFavourite ? Colors.red : Colors.white,
-            size: 28,
-          ),
+        child: Obx(
+          () {
+
+            final isFavourite = _listingController.isFavourite.value;
+
+            return GestureDetector(
+              onTap: () {
+
+                _listingController.toggleFavourite(widget.listingId);
+                
+              },
+              child: Icon(
+                isFavourite ? Icons.favorite : Icons.favorite_border,
+                color: isFavourite ? Colors.red : Colors.white,
+                size: 28,
+              ),
+            );
+          }
         ),
       ),
 

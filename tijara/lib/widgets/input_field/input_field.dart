@@ -6,6 +6,7 @@ class InputField extends StatefulWidget {
   final String labelText;
   final TextEditingController controller;
   final bool isPassword;
+  final int maxLines;
 
   const InputField({
     super.key,
@@ -14,6 +15,7 @@ class InputField extends StatefulWidget {
     required this.labelText,
     required this.controller,
     this.isPassword = false,
+    this.maxLines = 1
   });
 
   @override
@@ -35,6 +37,8 @@ class _InputFieldState extends State<InputField> {
       width: MediaQuery.of(context).size.width * widget.widthPercentage,
       height: MediaQuery.of(context).size.height * widget.heightPercentage,
       child: TextFormField(
+        maxLines: widget.maxLines,
+        textAlign: TextAlign.start,
         controller: widget.controller,
         obscureText: _obscureText,
         keyboardType: widget.isPassword

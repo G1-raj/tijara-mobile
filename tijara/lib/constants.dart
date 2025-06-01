@@ -40,6 +40,9 @@ const String getUserProfileRoute = "https://tijara-backend-production.up.railway
 //post route to logout the user it is protected route
 const String logoutRoute = "https://tijara-backend-production.up.railway.app/api/auth/logout";
 
+
+//******user action routes ******* *//
+
 //get route to get user details
 dynamic userProfileRoute(String id) => "https://tijara-backend-production.up.railway.app/api/users/public-profile/$id";
 
@@ -48,3 +51,12 @@ dynamic individualListingDetailsRoute(String id) => "https://tijara-backend-prod
 
 //post route to add listing into favourites and it is protected route so it required access token
 dynamic addListingToFavouriteRoute(String listingId) => "https://tijara-backend-production.up.railway.app/api/listings/saved/$listingId";
+
+//get route to get all the favourite listing of users it is protected route so it required access token
+const getFavouriteListingRoute = "https://tijara-backend-production.up.railway.app/api/listings/favorites";
+
+//delete route to remove listing from favourite section it is protected rotute so needed to pass access token
+dynamic removeFavouriteListingRoute(String listingId) => "https://tijara-backend-production.up.railway.app/api/listings/saved/$listingId";
+
+//put route to update user profile
+const updateProfileRoute = "https://tijara-backend-production.up.railway.app/api/users/profile";

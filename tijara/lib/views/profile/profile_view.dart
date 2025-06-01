@@ -16,9 +16,9 @@ class ProfileView extends StatelessWidget {
 
   // final UserController _userController = Get.put(UserController());
 
-  // final AuthController _authController = Get.put(AuthController());
+  final AuthController _authController = Get.put(AuthController());
 
-  final ListingController _listingController = Get.put(ListingController());
+  // final ListingController _listingController = Get.put(ListingController());
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +36,15 @@ class ProfileView extends StatelessWidget {
 
                 const SizedBox(height: 12,),
 
-                Text("Jhon Doe", style: TextStyle(
-                  color: blackColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22
-                ),),
+                Obx(
+                  () {
+                    return Text(_authController.user.value?.username ?? "Na", style: TextStyle(
+                      color: blackColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22
+                    ),);
+                  }
+                ),
 
                 Divider(
                   indent: MediaQuery.of(context).size.width * 0.18,
@@ -71,11 +75,11 @@ class ProfileView extends StatelessWidget {
 
                 ListTile(
                   leading: Icon(Icons.favorite),
-                  title: Text("Saved listings"),
+                  title: Text("Favourite or Saved listings"),
                   trailing: Icon(Icons.arrow_forward_ios),
 
                   onTap: () {
-                    Get.to(ListingView());
+                    Get.to(ListingView(isFavouriteList: true,));
                   },
                 ),
                 
@@ -100,11 +104,11 @@ class ProfileView extends StatelessWidget {
                   onPressed: () {
                     // _userController.getUserProfileController();
 
-                    // _authController.logOutController();
+                    _authController.logOutController();
 
-                    _listingController.getIndividualListingController("cmaxw3f0p0001jw1dp3mhpjfg");
+                    // _listingController.getIndividualListingController("cmaxw3f0p0001jw1dp3mhpjfg");
 
-                    print("Successfully executed logout succesfully😄");
+                    // print("Successfully executed logout succesfully😄");
                   },
                 )
 
